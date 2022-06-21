@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Cake Details</h1>
+
+<div class="card">
+    <div class="card-content">
+
+    <span class="card-title">
+        {{ cake.name }}
+    </span>
+    <p>Flavour bases: {{ cake.flavor_base }}</p>
+    <p>Rating: {{ cake.rating }}/5</p>
+
+    </div>
+</div>
+
+{% endblock %}

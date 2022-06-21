@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Cake List </h1>
+
+{% for cake in cakes %}
+
+    <a href="{% url 'detail' cake.id %}">
+    <div class="card">
+        <div class="card-content">
+            <div class="flex-container">
+                <div>
+                    <span class="card-title">
+                        {{cake.name}}
+                    </span>
+
+                    <p>Flavour Bases: {{ cake.flavor_base }}</p>
+                    <p>Description: {{ cake.description }}</p>
+                    <hr>
+                    <h3> Rating: {{ cake.rating }}/5 </h3>
+                    
+                </div>
+                <div class="imgdiv">
+                    <a href="{{ cake.image }}"><img src="{{ cake.image }}" id="image"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+
+{% endfor %}
+
+
+{% endblock %}

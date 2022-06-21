@@ -12,3 +12,15 @@ footer.page-footer {
     padding-top: 0;
     text-align: right;
 }
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#image {
+    object-fit: cover;
+    max-width: 250px;
+    height: 200px;
+    
+}
