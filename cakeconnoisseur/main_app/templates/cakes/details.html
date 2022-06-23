@@ -11,9 +11,65 @@
         {{ cake.name }}
     </span>
     <p>Flavour bases: {{ cake.flavor_base }}</p>
+    <p>Description: {{ cake.description }}</p>
     <p>Rating: {{ cake.rating }}/5</p>
 
     </div>
+
+    <div class="card-action">
+        <a href="{% url 'cakes_update' cake.id %}">Edit</a>
+        <a href="{% url 'cakes_delete' cake.id %}">Delete</a>
+
+    </div>
+
 </div>
+
+<div>
+
+    <form action="{% url 'add_order' cake.id %}" method="post">
+        {% csrf_token %}
+        {{ order_form.as_p }}
+        <input type="submit" value="Add Cake Record" class="btn">
+    </form>
+
+    {% if cake.eaten_today %}
+    <div class="card-panel teal-text center-align">{{ cake.name }} was last eaten today!</div>
+    {% else %}
+    <div class="card-panel red-text center-align"> {{ cake.name }} hasn't been eaten in a while!</div>
+    {% endif %}
+
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in cake.order_set.all %}
+            <tr>
+                <td>{{ order.date }}</td>
+                <td>{{ order.get_time_display }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+
+    var dateElement = document.getElementById('id_date');
+    M.Datepicker.init(dateElement, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+
+    var timeElement = document.getElementById('id_time');
+    M.FormSelect.init(timeElement);
+
+</script>
 
 {% endblock %}
